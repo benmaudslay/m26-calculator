@@ -1,18 +1,25 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { evaluate } from "mathjs";
 
 import buttons from "./buttons.json";
 
 const App = () => {
-  const [screen, setScreen] = useState([]);
+  const [screen, setScreen] = useState([0]);
 
   const handleClick = (val) => {
     if (val === "clear") {
       setScreen([0])
     } else if (val === "=") {
-      console.log("eval this string " + screen.join(""))
+      let currentStr = screen.join("")
+      let total = evaluate(currentStr)
+      setScreen([total])
     } else {
-      setScreen([...screen, val])
+      let newArr = [...screen, val]
+      if (newArr[0] === 0) {
+        newArr.shift()
+      }
+      setScreen(newArr)
     }
   }
 
@@ -22,8 +29,9 @@ const App = () => {
         <h1>{screen}</h1>
       </div>
       <ButtonWrapper>
-        {buttons.map((item) => (
+        {buttons.map((item, index) => (
           <StyledButton
+            key={index}
             className={item.style}
             onClick={() => handleClick(item.value)}
           >
