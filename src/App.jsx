@@ -1,36 +1,44 @@
-import './App.css';
-
-const buttons = [
-  { value: "clear", displayValue: "AC", style: "clear" },
-  { value: "/", displayValue: "÷", style: "operator" },
-  { value: "7", displayValue: "7", style: "number" },
-  { value: "8", displayValue: "8", style: "number" },
-  { value: "9", displayValue: "9", style: "number" },
-  { value: "*", displayValue: "x", style: "operator" },
-  { value: "4", displayValue: "4", style: "number" },
-  { value: "5", displayValue: "5", style: "number" },
-  { value: "6", displayValue: "6", style: "number" },
-  { value: "-", displayValue: "-", style: "operator" },
-  { value: "1", displayValue: "1", style: "number" },
-  { value: "2", displayValue: "2", style: "number" },
-  { value: "3", displayValue: "3", style: "number" },
-  { value: "+", displayValue: "+", style: "operator" },
-  { value: "0", displayValue: "0", style: "number zero" },
-  { value: ".", displayValue: ".", style: "number" },
-  { value: "=", displayValue: "=", style: "operator" },
-]
+import styled from "styled-components"
+import buttons from "./buttons.json"
 
 const App = () => {
   return (
     <div>
       <div className="screen-wrapper"><h1>0</h1></div>
-      <div className="button-wrapper">
+      <ButtonWrapper>
         {buttons.map((item) => (
-          <button className={item.style} mathValue={item.value} >{item.displayValue}</button>
+          <StyledButton className={item.style} mathValue={item.value} >{item.displayValue}</StyledButton>
         ))}
-      </div>
+      </ButtonWrapper>
     </div>
   )
 }
+
+const ButtonWrapper = styled.div`
+  height: 250px;
+  width: 200px;
+  display: grid;
+  grid-template-areas: 
+    "clear clear clear ." 
+    ". . . ." 
+    ". . . ." 
+    ". . . ." 
+    "zero zero . .";
+
+  .clear {
+    grid-area: clear;
+  }
+
+  .zero {
+    grid-area: zero;
+  }
+`
+
+const StyledButton = styled.button`
+  /* height: 40px;
+  width: 40px;
+  margin: 10px */
+  /* border-radius: 0; */
+`
 
 export default App;

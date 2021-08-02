@@ -11,3 +11,13 @@ React Components
 2. Button x 17
 
 There's the plan, lets go build it.
+
+
+CSS Plan:
+4 x 5 grid
+
+each button to be 50px h w inc margin
+
+button grid:
+200px w
+250px h
